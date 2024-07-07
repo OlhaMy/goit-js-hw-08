@@ -82,8 +82,31 @@ function createGalleryItem(obj) {
 `;
 }
 
-function galleryRender(images) {
+function renderGallery(images) {
   const galleryMarkup = images.map(createGalleryItem).join("");
   refs.galleryList.insertAdjacentHTML("beforeend", galleryMarkup);
 }
-galleryRender(images);
+renderGallery(images);
+
+refs.galleryList.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (e.target === e.currentTarget) {
+    return;
+  }
+
+  const clickedImage = e.target.closest("img");
+  if (clickedImage) {
+    showModal(clickedImage.dataset.source, clickedImage.alt);
+  }
+});
+
+function showModal(src, alt) {
+  const instance = basicLightbox.create(`
+  <div class="modal">
+  <img src="${src}" alt="${alt}" />
+ </div>
+`);
+
+  instance.show();
+}
