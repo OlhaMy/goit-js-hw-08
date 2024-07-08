@@ -68,14 +68,14 @@ const refs = {
   galleryList: document.querySelector(".gallery"),
 };
 
-function createGalleryItem(obj) {
+function createGalleryItem({ preview, original, description }) {
   return `<li class="gallery-item">
   <a class="gallery-link" href="large-image.jpg">
     <img
       class="gallery-image"
-      src=${obj.preview}
-      data-source=${obj.original}
-      alt=${obj.description}
+      src=${preview}
+      data-source=${original}
+      alt=${description}
     />
   </a>
 </li>
